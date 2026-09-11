@@ -11,7 +11,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class MainActivity extends AppCompatActivity {
+
+    TextInputLayout tilEmail, tilSenha;
+
+    TextInputEditText edtEmail, edtSenha;
+
+    Button btnLogin;
 
     private Button btnTest;
 
@@ -25,11 +34,32 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnTest = findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
+
+        tilEmail = findViewById(R.id.tilEmail);
+        tilSenha = findViewById(R.id.tilSenha);
+        edtSenha = findViewById(R.id.edtSenha);
+        edtEmail = findViewById(R.id.edtEmail);
+        btnLogin = findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_LONG).show();
+                String email = edtEmail.getText().toString().trim();
+                String senha = edtSenha.getText().toString().trim();
+
+                tilEmail.setError(null);
+                tilSenha.setError(null);
+
+                if (email.isEmpty()){
+                    tilEmail.setError("Informe o e-mail");
+                    return;
+                } else if (senha.isEmpty()) {
+                    tilSenha.setError("Informe a senha");
+                    return;
+                }
+                Toast.makeText(MainActivity.this, "login Efetuado", Toast.LENGTH_SHORT).show();
+
+
             }
         });
     }
